@@ -1,0 +1,54 @@
+\documentclass{studArbeit}
+
+%Trennungsregeln
+\hyphenation{Beispiel}
+
+
+\begin{document}
+%%%Hier alles wichtige ausfüllen und schon werden Titelseite und Aufgabenstellung zusammengebaut
+%Tragen Sie hier alle Daten für die TitelSeite ein:
+\ArtDerArbeit{Masterarbeit}
+\AusgabeArbeit{25.02.2012}
+%Der Titel der Arbeit in Deutsch und Englisch
+\TitelDeutsch{Dies ist der deutsche Titel der Arbeit\\[2mmm] gerne auch etwas länger}
+\TitelEnglisch{The english title \\ could be as long as you want} 
+%Hier kommt die Aufgabenstellung herein
+\TextAufgabenstellung{
+Hier wird einfach die Aufgabenstellung eingetragen.\\
+\textbf{Ziel der Arbeit} ist es, eine gute Vorlage für studentische Arbeiten zur Verfügung zu stellen.\\
+\textbf{Ablauf der Arbeit:} Nach der Einarbeitung in das Thema ist ein Exposé zu erstellen, welches eine genauere Beschreibung des Lösungsweges sowie einen zugehörigen Zeitplan enthält. Diese ist spätestens vier Wochen nach Ausgabe der Aufgabenstellung mit dem Betreuer zu diskutieren und bildet die Grundlage für das weitere Vorgehen in der Bearbeitung der Aufgabenstellung.
+}
+%Autor
+\Autor{Karl Theodor Müller Lüdenscheidt}
+\AutorMatrikel{003202628}
+\AutorEmail{karl.Luedenscheidt@uni-rostock.de}
+%Studiengang: Bachelor Maschinenbau / Master schiffs- und Meerestechnik
+\AutorStudiengang{Master Schiffs- und Meerestechnik}
+\Bearbeitungszeitraum{6 Monate}
+%Gutachter der Arbeit
+\ErstGutachter{Prof. Dr.-Ing. Robert Bronsart}
+\ZweitGutachter{Dipl.-Ing. Lutz Kleinsorge}
+
+
+%Ab hier nichts verändern
+% Tragen Sie die verwendeten Formeln und Abkürzungen in die datei "`Include/Akb-Formel.tex"` in die entsprechenden Tabellen ein.
+% Ihre Arbeit schreiben Sie in dem Dokument "'Include/main.tex"`
+% Abbildungen, Tabellen, etc. sollten Sie in das Verzeichnis "'Inlcude/figures"` speichern.
+% Ihre Literaturquellen speichern Sie in der Datei "'Include/Bib/bib.bib"` ab.
+\automark[]{chapter}
+\titelSeite
+\aufgabenstellung
+\toc
+\include{Include/Abk-Formel}
+\start
+
+%Datei mit Haupt-Text
+\includefrom{Include/}{main}
+%Anhang
+\appendix
+\includefrom{Include/}{Anhang}
+%Bibliography
+\bibliographystyle{plain} 
+\bibliography{Include/Bib/bib} %Ort der Bib-Tex-Datei
+\selbst
+\end{document}

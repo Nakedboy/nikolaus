@@ -1,0 +1,9 @@
+\chapter{Anhang}
+\section{Seitenansicht CAD-Modell}\label{app:cad}
+\begin{figure}[h!]
+\centering
+  \includegraphics[height=0.6\textheight]{./figures/schiff.png}
+  \caption{Seitenansicht eines CAD-Modells}
+\end{figure}
+\newpage
+

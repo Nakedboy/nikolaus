@@ -1,0 +1,34 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einf\"uhrung}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Ziel der Arbeit}{1}{section.1.2}
+\contentsline {chapter}{\numberline {2}Grundlagen}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Zusammensetzung des Gesamtwiderstandes}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}regul\"are Wellen}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}irregul\"are Wellen}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}Seegangsspekrtum}{7}{section.2.4}
+\contentsline {section}{\numberline {2.5}Streifentheorie}{8}{section.2.5}
+\contentsline {chapter}{\numberline {3}Hauptteil}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Methoden nach Vorgabe ITTC}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Widerstand durch Wind}{9}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Widerstand durch Wellen}{10}{subsection.3.1.2}
+\contentsline {subsubsection}{Berechnung des Widerstandes nach ITTC - Recommended Procedures and Guidelines}{10}{section*.3}
+\contentsline {subsubsection}{Theorie von Maruo}{10}{section*.4}
+\contentsline {section}{\numberline {3.2}empirische Methoden}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Aertssen-Formel}{12}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Kwon-Formel}{12}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Lloyd}{15}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Faltinsen Formel}{16}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Approximierte Salvensen Methode}{17}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Schneekluth}{18}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Kreitner-Formel}{19}{subsection.3.2.7}
+\contentsline {section}{\numberline {3.3}numerische Methoden}{20}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Boese}{20}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Gerristma und Beukelman}{23}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Salvensen methode}{24}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}CFD-Anwendungen}{25}{section.3.4}
+\contentsline {section}{\numberline {3.5}Implemtierung}{25}{section.3.5}
+\contentsline {section}{\numberline {3.6}Vergleich und Auswertung}{25}{section.3.6}
+\contentsline {chapter}{\numberline {4}Zusammenfassung}{26}{chapter.4}
+\contentsline {chapter}{\numberline {A}Anhang}{27}{appendix.A}
+\contentsline {section}{\numberline {A.1}Seitenansicht CAD-Modell}{27}{section.A.1}

@@ -1,0 +1,56 @@
+
+\documentclass{studArbeit}
+
+%Trennungsregeln
+\hyphenation{Beispiel}
+
+
+
+\begin{document}
+%%%Hier alles wichtige ausfüllen und schon werden Titelseite und Aufgabenstellung zusammengebaut
+%Tragen Sie hier alle Daten für die TitelSeite ein:
+\ArtDerArbeit{Studienarbeit}
+\AusgabeArbeit{15.04.2013}
+%Der Titel der Arbeit in Deutsch und Englisch
+\TitelDeutsch{Analyse und Vergleich von Methoden zur Bestimmung\\[2mm] des Zusatzwiderstandes im Seegang}
+\TitelEnglisch{Analysis and comparison of different Methods\\ for added resistance in seaways} 
+%Hier kommt die Aufgabenstellung herein
+\TextAufgabenstellung{
+Die Bestimmung des Widerstandes und damit der Antriebsleistung einer Schiffsform ist im Entwurfsprozess von hoher Bedeutung. In der Regel handelt es sich bei dem dabei ermittelten Wert allerdings nur um den Galttwasserwiderstand des Schiffes, während zusätzlicher Widerstandsanteile - zum Beispiel bedingt durch Seegang - über einen pauschalen Aufschlag in Höhe von 10 - 15\% der sogenannten Sea-Margin, berücksichtigt werden. Im Zuge der anhaltenden Wirtschaftskrise und dem darausfolgendem Druck zur Entwicklung effizienter Schiffsformen wird derzeit vermehrt daran gearbeitet, diesem recht ungenauen Ansatz präzisere Methoden entgegenzusetzen.\\
+\textbf{Ziel der Arbeit} ist es, eine Analyse der zur Zeit zur Verfügung stehenden Methoden zur Ermittlung der umweltbedingten Zusatzwiderstände durchzuführen. Dabei sollen sowohl überschlägige als auch numerische Verfahren untersucht werden. Darauf aufbauend sollen ausgewählte Methoden implementiert und anhand eines Beispielschiffes miteinander verglichen werden.\\
+Die im Rahmen der Arbeit durchzuführenden Tätigkeiten und Aufgabenpakete sind spätenstens vier Wochen nach Bearbeitungsbeginn mit dem Betreuer abzustimmen. Dafür ist ein Kurzexpos\'{e} der Arbeit vorzulegen.
+}
+%Autor
+\Autor{Christopher Leu}
+\AutorMatrikel{003202036}
+\AutorEmail{christopher.leu@uni-rostock.de}
+%Studiengang: Master Maschinenbau / Master Schiffs- und Meerestechnik
+\AutorStudiengang{Master Schiffs- und Meerestechnik}
+\Bearbeitungszeitraum{6 Monate}
+%Gutachter der Arbeit
+\ErstGutachter{Prof. Dr.-Ing. Robert Bronsart}
+\ZweitGutachter{Dipl.-Ing. Jonas Wagner}
+
+
+%Ab hier nichts verändern
+% Tragen Sie die verwendeten Formeln und Abkürzungen in die datei "`Include/Akb-Formel.tex"` in die entsprechenden Tabellen ein.
+% Ihre Arbeit schreiben Sie in dem Dokument "'Include/main.tex"`
+% Abbildungen, Tabellen, etc. sollten Sie in das Verzeichnis "'Inlcude/figures"` speichern.
+% Ihre Literaturquellen speichern Sie in der Datei "'Include/Bib/bib.bib"` ab.
+\automark[]{chapter}
+\titelSeite
+\aufgabenstellung
+\toc
+\include{Include/Abk-Formel}
+\start
+
+%Datei mit Haupt-Text
+\includefrom{Include/}{main}
+%Anhang
+\appendix
+\includefrom{Include/}{Anhang}
+%Bibliography
+\bibliographystyle{unsrt} 
+\bibliography{Include/Bib/bib} %Ort der Bib-Tex-Datei
+\selbst
+\end{document}

@@ -1,0 +1,739 @@
+\chapter{Einführung}
+
+\section{Motivation}
+
+In einer Weltwirtschaft steigender Ölpreise \cite{BP} und starker Konkurrenz um Frachtraten \cite{IHS}, wird die Effektivität und Effizienz des Schifftransportes und damit auch der Schiffsentwicklung immer bedeutender. Dabei werden immer höhere Anforderungen, an der Verringerung des Schiffswiderstandes und der genaueren Bedarfsermittlung der benötigten Antriebsleistung, gestellt. Trotz der heutigen Möglichkeiten erfolgt die Leistungsberechnung meist in den Glattwasserbedingungen. Reibungsbedingter Widerstand und der Restwiderstand durch Wellen, Anhänge und Wind sind die wesentlichen Bestandteile der Widerstandsberechnung. Der zusätzliche Widerstand im Seegang wird mit einer pauschalen Größe, der Sea-Margin beaufschlagt. Doch konnte bereits für einige Schiffstypen festgestellt werden, dass \glqq eine Sea-Margin von 15\% für die hier untersuchten Service Bedingungen nicht ausreichend ist \grqq \cite{hollenbach}. Bei größeren Containerschiffen jedoch, kann eine fünfzehnprozentige Sea-Margin, zu einer Überdimensionierung der Maschinenanlage und damit zu unnötigen Mehrkosten führen. Bei kleineren Containerschiffen wird die Servicegeschwindigkeit im starken Seegang jedoch nicht mehr erreicht. 
+
+\section{Ziel der Arbeit}
+
+Ziel der Arbeit ist es, einen Überblick über die vorhandenen Methoden zur Bestimmung des zusätzlichen Widerstand zu verschaffen. Dazu werden die vorhanden überschlägigen und numerischen Methoden zur Ermittlung des Zusatzwiderstandes, dargestellt, analysiert und miteinander verglichen. Es soll geklärt werden, welche wesentlichen Methoden gibt es überhaupt und wodurch unterscheiden sich diese. Dabei wird genauer auf die Überlegungen und Ansätze der überschlägigen Methoden eingegangen. Im Vergleich dazu, wird die Arbeitsweise der numerischen Methoden betrachtet und mit den überschlägigen Methoden verglichen. Neben dem zusätzlichen Energiebedarf, durch Wellen im Seegang, wird auch der zusätzliche Widerstand des Windes betrachtet. Durch die umfangreiche Recherche der vorhandenen Literatur sollen die einzelnen Methoden und Herangehensweisen entsprechend dargestellt werden. Ziel ist es, sich einen verständlichen Überblick zu verschaffen. Umfangreiche mathematische Herleitungen und Geschichte der Methoden wird nur so weit wie nötig betrachten und soll nicht hinreichend vertieft werden. Die Schwierigkeiten liegen hierbei, die geringe Anzahl an Veröffentlichungen zu diesem Thema zu recherchieren und entsprechend verständlich zu machen. Dazu wurden Artikel zusammengefasst, vereinfacht und, aufgrund der meist englisch sprachigen Veröffentlichungen, übersetzt. Desweiteren kann mit den entsprechenden Methoden eine Aussage über die Qualität der Sea-Margin für ein Schiff getroffen werden. Dazu wurde die beste Methode mit deinem Programm implementiert und so, können entsprechend Widerstände berechnet und ausgwertet werden. Neben der Vorstellung und Implementierung, dient die Arbeit als komplakte Sammlung und Darstellung der wichtigsten Methoden, ohne umständlich auf die einzelne Literatur zurückgreifen zu müssen. 
+
+\chapter{Grundlagen}
+
+\section{Zusammensetzung des Gesamtwiderstandes}
+
+Widerstand bezeichnet eine Kraft, die einer gerichtenten Kraft entgegenwirkt. Ein Schiff, dass sich im Wasser fortbewegt, muss eine Kraft aufwenden, um die Widerstandskraft, die dem Schiff entgegenwirkt zu überwinden. Bei der Zusammensetzung aller Widerstandsanteile, die den Gesamtwiderstand ergeben, gibt es unterschiedliche Ansätze. So gibt M.R. Khiatani in seiner Arbeit \grqq Der Einfluss des Zusatzwiderstandes durch Seegang und Wind auf den Schiffsentwurf \grqq \cite{Khiatani1985} folgenden Zusammensetzung für den Widerstand unter Betriebsbedingung an:\
+
+\begin{eqnarray}
+R_G=R_{GW}+R_{AW}+R_{AA}+R_B \label{equ:T}
+\end{eqnarray}
+
+mit:
+
+$R_G$= Gesamtwiderstand\\
+$R_{GW}$= Glattwasserwiderstand\\
+$R_{AW}$= Widerstand durch Seegang\\
+$R_{AA}$= Widerstand durch Wind\\
+$R_B$= Widerstand durch Bewuchs\\
+
+In der ISO 15016 (2002) \cite{ISO2002}, werden die Richtlinien zur Bestimmung des Widerstand durch Wellen und Wind angegeben. Diese ISO Norm gibt eine alternative Gleichung für die äußeren Faktoren der Erhöhung des Widerstandes an:\\
+
+\begin{eqnarray}
+\Delta R=R_{AA}+R_{AW}+R_{\delta \delta}+R_{\beta  \beta}+R_{AS}+R_{AIDS} \label{equ:T}
+\end{eqnarray}
+
+mit:\\
+
+$R_{\delta \delta}$= durch Kursänderung / Steuerung\\
+$R_{\beta  \beta}$= durch Driften\\
+$R_{AS}$= durch Temperatur und Salzkonzentration\\
+$R_{AIDS}$=durch Abweichung der Verdrängung\\
+
+Dies zeigt die unterschiedlichen Prioritäten der einzelnen Verfasser, welcher Anteil in die Gesamtrechnung einfliesen soll. Die wichtigsten Parameter Wind und Wellen, finden in allen Gleichungen, ihre Anwendung. Wird nur der Widerstand durch Wellen betrachtet, setzt sich der Gesamtwiderstand bei Wellen aus dem Glattwasserwiderstand und dem durch Wellen zusätzlichen induzierten Widerstand zusammen.\\
+
+Der \textbf{Glattwasserwiderstand} wird durch Schleppversuche bestimmt und wird in reibungsbehafteten Widerstand und Restwiderstand aufgeteilt. Der Reibungswiderstand kann nach der ITTC 57 bestimmt werden.\\
+
+\begin{eqnarray}
+R_T=R_F + R_R \label{equ:T}
+\end{eqnarray}
+
+
+Auslöser des \textbf{zusätzlichen Widerstandes durch Wellen}, ist der natürliche Seegang. Aufgrund des Windes, bilden sich Wellen. Durch die darausfolgende Auf- und Abbewegung des Schiffes beim durchfahren einer Wellen, entsteht ein zusätzlicher Energie-, sowie Geschwindigkeitsverlust. Und kann an folgendem Beispiel genauer dargestellt werden. Zwei Schiffe, durchfahrem mit der exakt gleichen Geschwindigkeit Punkt 1, um Punkt 2 zu erreichen. Schiff 1 bewegt sich im Glattwasser und erreicht Punkt 2 direkt. Schiff 2 dagegen, durchfährt eine Welle. Fährt die Welle also auf und wieder ab. Die Strecke, die Schiff 2 zurücklegt, ist folglich länger und benötigt dadurch mehr Zeit. Im lokalen Koordinatensystem besitzen beide Schiffe die gleiche Geschwindigkeit. Im globalen Koordinatensystem, erreicht Schiff 2 den Punkt 2 später. Es ensteht also ein globaler Geschwindigkeitsverlust. Zusätzlich muss Schiff 2 mehr Energie zum Überwinden der Welle aufbringen. Es kommt also neben dem Geschwindigkeitsverlust, zusätzlich ein Energieverlust, der zu beachten ist.\\
+
+Oder anders ausgedrückt, ist der natürliche Seegang die Überlagerung vieler Einzelwellen. Die daraus folgende Einzelwelle beschreibt einen sinusförmigen Verlauf. Das Schiff bewegt sich durch die Wellenbewegung nicht nur horizontal, sondern zudem auch in vertikaler Richtung. Ausgehend von einer harmonischen Wellenbewegung, bewegt sich das Schiff sinuskurvenförmig. Durch die Schwingungsbewegungen des Schiffes, also Tauchen, Stampfen, Rollen, kommt es zur einer Änderung der Anströmung gegenüber der Anströmung unter Glattwasserbedingungen. Durch die Schiffsbewegungen, kommt es zu Druckänderungen, die in Richtung und Betrag ändernde Druckkraft. Der zusätzliche Widerstand durch den Seegang, ist der zeitliche Mittelwert dieser Druckkraftkomponente der der Fahrtrichtung entgegenwirkt. [vgl.]\cite{Khiatani1985}\\
+
+Nach der Methode von Boese \cite{Boese1970} setzt sich der Seegangswiderstand aus 2 Komponenten zusammen. Die erste Komponente, berücksichtigt alle hydrodynamischen Druckkräfte an der Schiffsoberfläche bis zu Ruhe-Wasserlinie. Die 2. Komponente berücksichtigt alle Druckkräfte an der zeitweilig benetzten Oberfläche. Auf das Verfahren von Boese wird später in der Arbeit noch einmal genauer eingegangen. Die Erhöhung des Widerstands bei der Bewegung durch das Wasser, setzt sich auch zwei Komponenten zusammen.\\
+
+$\Delta r = \Delta r_1 + \Delta r_2$\\
+
+
+Der zusätzliche \textbf{Widerstandes durch Wind} entsteht dadruch, dass die Windkraft auf die Oberfläche des Überwasserchiffes einen Druck ausübt. Die dadurch enstehende Widerstandkraft, muss durch zusätzliche Energie überwunden werden. Wichtige Rolle spielt neben der Windrichtung zum Schiff, die Form des Überwasserschiffes. Diese lässt sich in einem dimensionlosen Widerstandsbeiwert ausdrücken. Dieser Widerstandsbeiwert kann über empirische Daten oder spezifische Windkanaltest bestimmt werden.\\
+
+Beim \textbf{Widerstandes durch Bewuchs}, entsteht durch die geänderte Oberflächenstruktur an der Schiffsau\ss enhaut. Der Rauhigkeitsgrad nimmt durch die Ansammlung von Organismen, wie Algen, Pilzen und Muschel zu, und führt damit zu einer Widerstandserhöhung und damit zu einem höheren Energiebedarf \cite{Bewuchs}. Dieser Widerstand wird hier für die Vollständigkeit aufgeführt, findet aber in den späteren Berechnungen keine weitere Beachtung.\\
+
+Die Erhöhung des \textbf{Widerstandes durch Kursänderung} durch eine Ruderbewegung und dem dadurch induzierten Widerstand, ist sehr klein und kann vernachlässigt werden.\\
+
+Der zusätzliche \textbf{Widerstande durch Abweichung der Verdrängung} tritt auf, wenn es aufgrund der Ladung oder Ballastwasseraufnahme, eine Abweichung von der zuvor im Grunddesigne festgelegt Tiefgang gibt. Desweiteren tritt dieser Effekt bei Änderung des Trimmwinkel auf.\\
+
+Der \textbf{Widerstand durch Temperatur und Salzkonzentration} ändert sich bei unterschiedlicher Dichte des Salzwassers. Eine Erhöhung der Dichte bewirk auch ein Zunahme des Widerstandes. Die geschied bei Temperaturänderung, sowie der Änderung der Konzenration des Salz im Meerwasser.\\
+
+Für den zusätzliche \textbf{Widerstand durch Driften} ist der Abdriftwinkel verantwortlich. Dieser ensteht, wenn die Schiffslängsache von der eigentlichen Fahrtrichtung abweicht [Vgl] \cite{Haakenstad2012}.\\
+
+In dieser Arbeit werden nur Berechnungsmethoden der Widerstandsänderung durch Wind und Wellen betrachtet. Die restlichen Anteile werden vernachlässigt, da diese nur einen sehr geringen Anteil am Gesamtwiderstand ausmachen.\\
+
+
+\section{reguläre Wellen}
+
+Wellenbewegung und natürliche Wellenbewegung lassen sich in entsprechende idealisierte Formeln darstellen, um diese, für Berechnungen zu verwenden. \grqq The Specialist Committee on Waves Final Report and Recommendations to the 23rd ITTC \grqq \cite{23ITTC} gibt eine sehr gute Übersicht und Zusammenfassung der wichtigsten Wellenspektren und deren genaue Definition an. Darüber hinaus werden reguläre Wellen, wie folgt beschrieben:
+
+Idealerweise sind regelmäßige periodische Wellen unidirektionale, progressive Wellenzüge, mit einem einzigen (einfarbig) Grundharmonische. Hauptinteresse bei Wellenhöhe H und die Wellenperiode T. Amplituden H/2. Idealerweise sind die Bedingungen über Raum und Zeit konstant. Es gibt immer ein Niveau von Variationen. Parameter sind in einem Ansatz eines Zeitbereich definiert (Nulldurchgang) oder durch den Ansatz einer harmonische Welle (Fourier). Wellenperioden werden in einem globalen System beschrieben oder in ein relatives System zu einem Objekt. Nicht-linare Effekte, mit zunehmender Steilheit der Welle führt zum Abweichen von der harmonischen Welle. Die asymmetrische Wellengeometrie,mit erhöhter Kämme und verbunden lokale Steilheit, können wichtig sein, z. B. in Stabilität Tests. Wellen in einer Strömung: theoretischer ein perfekter Dauerstrom mit leichter Reduzierung der Wellenhöhe und der Erhöhung der Wellenlänge oder mit steigender Wellenhöhe einer Reduzierung der Wellenlänge. Nicht-lineare Wellen haben einen Einfluss auf die hydrodynamischen Kräfte. Wellen die durch die Strömung mit einem bestimmten Winkel auftreffen, unterliegen Brechungseffekten. Aufgrund der verschiedensten Einflüsse aus der Umwelt und der schwer zu kontrollierenden Bedingung sind reguläre / ideale Wellen in Bezug zur Realität kritisch zu bewerten.\\
+
+
+\section{irreguläre Wellen}
+
+Wellen, die bestimmte Eigenschaften von Wellen eines echten Wellenfeldes des Ozeans wiederspiegeln. Wichtige Eigenschaften sind, Amplitude, spektrale Verteilung, Statistik, nicht lineare Ausbreitung, Extremwerte. Dies bedeutet eine physikalische oder numerische Simulation der Beispieldaten eines statistischen Wellenzuges. All diese Parameter werden in einem Wellenspektrum zusammengefasst. Primäre spektralen Parameter sind die signifikante Wellenhöhe Hs, definiert als $H_{m0} = 4 \cdot \sqrt{ m_0}$, und eine charakteristische Wellenperiode. zum Beispiel, dass JONSWAP Modell oder  Pierson \& Moskowitz Aufgrund der natürlichen Streuung bei den Parametern, wird ein Spektrum \glqq geglättet \grqq. Dies hat zur Folge, dass bestimmte Effekte gemindert werden. Deshalb ist darauf zu achten, welches Spektrum verwendet wurde und welche besonderen Eigenschaften diese besitzt. Aufgrund besserer Felddaten werden häufiger auch Bi-Modulare Spektren verwendet, die die Parameter von Wind und Wellenströmung zusammenfassen. Um den gemittelten Widerstand durch regelmäßige Wellen zu berechnen, wird die Antwortfunktion des Schiffes mit einem Seegangsspektrum verbunden.\\
+
+\section{Seegangsspekrtum}
+
+Um den natürlichen Seegang zu erfassen und damit beispielsweise rechnen zu können, wird versucht, diesen statistisch zu erfassen und in einem Spektrum zu beschreiben. Der Seegang wird dazu stationär betrachtet und als normalverteielter Zufallsprozeß angesehen. Dieser lä\ss t sich durch sein Energiespekrtum charakterisieren. Dabei wird das Schiff als lineres dynamisches System im Seegang behandelt. Der Seegang ist die Ursache für die Schiffsbewegung. Da der Prozeß des Seegangen ein stationär, normalverteilter Prozeß ist, ist somit auch die Antwort des Schiffes ein stationär, normalverteilter Prozeß. [Vgl] \cite{Nowacki} Dadurch, kann das Zusammenspiel von Seegang und Schiffsbewegung in folgender Gleichung vereinfacht dargestellt werden:\\
+
+\begin{equation}
+Antwortspektrum = Seegangsspektrum \cdot Frequenztransformation \cdot Vergrößerungsfuntion^2 \label{equ:T}
+\end{equation}
+
+In den Anhängen von dem \grqq The Specialist Committee on Waves Final Report and Recommendations to the 23rd ITTC \grqq gibt es eine Zusammenstellung der wichtigsten Seegangsspektren.
+
+Folgende Seegangsspektren werden dort genau beschrieben:
+
+\begin{itemize}
+
+\item Generalisierte Pierson Moskowitz oder Bretschneider Spektrum
+\item Spectrum der verallgemeinerten Form von Pierson Moskowitz.
+\item ITTC Spektrum
+\item JONSWAP Spektrum
+\item Scott Spektrum
+\item Ochi-Hubble bi-modale Spektrum
+\item TMA Spektrum
+\item Mitsuyasu Spektrum
+
+\end{itemize}
+
+Das Seegangsspekrum versucht die spektralen Eigenschafften mit einer kleinen definierten Anzahl von Parametern zu beschreiben. Es gibt viele unterschiedliche Modelle, die eine große Gemeinsamkeit, aber keine allgemeine Gültigkeit besitzen. Die meisten Modelle für das Spektrum an einem Punkt, werden mit Hilfe der Bretschneider-Formel beschrieben. Diese besitzt folgen spektrale Form:
+
+\begin{equation}
+S(f)= \frac{A}{f^5}exp(-B/F^4) \label{equ:T}
+\end{equation}\\
+
+wobei $f$ die Frequenz angibt und A und B definierte Konstanzen sind.\\
+
+So beschreiben A und B die signifikante Wellenhöhe oder die Windgeschwindigkeit beim Ein-parametrische Pierson-Moskowitz Spekrtum. Beim ITTC Spekrtum dagegen, die signifikante Wellenhöhe und Hauptperiode. Andere Spektren besziehen sich auf eine endliche Wassertiefe, wie das TMA-Spektrum. Oder, auf eine Konzentration der Wellenenergie auf zwei unterschiedlichen Frequenzbereichen, wie beim Ochi-Hubble bi-modarem Spektrum.\\
+
+\section{Streifentheorie}
+
+Die Streifentheorie oder STRIP-Theory, bedeutet einfach die Zerlegung des Schiffes in n-Querstreifen. Jeder Streifen besitzt lokale hydrodynamischen Eigenschaften. Bei der Streifentheorie wird jeder Streifen so betrachtet, als wäre er ein Teil eines unendlichen Zylinders in seiner Form. Dadurch werden dreidimensionalle Effekte, Wechselwirkungen der verschiedensten Streifen untereinander und Fluidumströmungen an den Enden vernachlässigt. 
+
+Alle Theorien beinhalten:
+
+\begin{itemize}
+
+\item schlankes Schiff (Länge größer als breite)
+\item starrer Schiffkörper, keine Verbiegung des Körpers
+\item mäßige geschwindigkeiten
+\item kleine bewegungen
+\item tiefwasser wellen
+\item die schiffshülle hat keinen einfluss auf die wellen
+
+\end{itemize}
+
+Die Streifentheorie findet ihre Anwendung bei der numerischen Berechnung des zusätzlichen Widerstanden durch Wellen, bei der Analye von Schiffsbewegungen oder Druckverteilung am Schiff im Glattwasser.[vgl.]\cite{Lloyd1989}\\
+
+WEITERE INFOS EINTRAGEN\\
+Literaturverweis!
+
+
+\chapter{Hauptteil}
+
+\section{Methoden nach Vorgabe ITTC}
+
+Die Ursache für die Entstehung von Wellen ist der Wind. Zusätzlich erzeugt der Wind eine Widerstandskraft, sobald er auf die Oberfläche des Überwasserschiffes trifft. Die ITTC verweist bei der Bestimmung des zusätzlichen Widerstandes auf ihre ITTC - Recommended Procedures and Guidelines\cite{ITTCRPG}, sowie auf die ISO 15016 \cite{ISO2002}. Dort finden sich für die einzelnen Widerstandsanteile entsprechende Berechnungsmethoden und Verweise.  
+
+\subsection{Widerstand durch Wind}
+
+Nach ISO 15016 kann der zusätzliche Widerstand wie folgt berechnet werden:\\
+
+\begin{equation}
+R_{AA} = 0,5 \cdot \rho_A \cdot C_{AA}(\psi_{WR}) \cdot A_{XV} \cdot V_{WR}^2 \label{equ:T}
+\end{equation}\\
+
+und mit der Bedingung:\\
+
+\begin{equation}
+ C_{AA}(\psi_{WR} = C_{AA0} \times K(\psi WR)  \label{equ:T}\\
+\end{equation}
+
+wobei:\\
+
+$A_{XV}$ = die maximale Querschnittsfläche, die dem Wind ausgesetzt ist in [$m^2$]\\
+$C_{AA}(\psi_{WR})$ = Widerstandskoeffizient des Windes\\
+$C_{AA0}$ = Widerstandskoeffizient bei Wind von Vorne\\
+$K(\psi_{WR})$ = Widerstandkoeffizient aus der Windrichtung\\
+$V_{WR}$ = die relative Windgeschwindigkeit in [m/s]\\
+$\psi_{WR}$ = Windrichtung in [rad]\\
+$\rho_A$ = Dichte der Luft in [kg/$m^3$\\
+
+Der Widerstandskoeffizient der Windrichtung und der Widerstandkoeffizient bei Wind von Vorn können durch entsprechende Windkanaltests mit einem Modell ermittelt werden. Falls Daten für geschlossenen Schiffstypen vorhanden sein sollten, dürfen diese Daten bei ähnlichen Schiffen angewendet werden. Sind keine Daten vorhanden oder das Schiff besitzt eine ungewöhnliche Struktur der Deckaufbauten, sind die Daten von Modellstest unverbindlich.\\
+
+\subsection{Widerstand durch Wellen}
+
+\subsubsection{Berechnung des Widerstandes nach ITTC - Recommended Procedures and Guidelines}
+
+In den \grqq Procedures and Guidelines \grqq geht die ITTC von folgender Zusammensetzung des Gesamtwiderstandes aus:
+
+
+\begin{equation}
+\delta R = R_{AA} + R_{AW} + R_{AS} \label{equ:T}
+\end{equation}\\
+
+Auf die Berechnung des Widerstandes durch den Wind wurde bereits eingegangen. Um den Widerstand im irregulärem Seegang zu berechnen, wird folgende Formel angegeben:
+
+\begin{equation}
+\delta R_{AW} = 2 \int\limits_{0}^{2 \pi} \int\limits_{0}^{\infty} \frac {R_{wave}, \alpha; V_S}{\zeta_A^2} E \omega \alpha d\omega d\alpha  \label{equ:T}
+\end{equation}\\
+
+mit:\\
+
+
+\begin{equation}
+\delta S_f (\omega) G(\alpha) \label{equ:T}
+\end{equation}
+
+$G$ = Winkelverteilungsfunktion\\
+
+Dadurch wird der Zusammenhang zwischen einem regulärem Seegang, der Wellenrichtung, Wellenamplitude und Wellenfrequenz dargestellt.
+
+Um den Widerstand durch die Änderung von Temperatur und Salzkonzentrations bestimmen, kann mit Hilfe der allgemeinen Widerstandformel folgende Berechnung angewendet werden:\\
+
+\begin{equation}
+R_{AS} = R_{T0} (1- \frac{\rho}{\rho_0}) - R_F (1-\frac{C_{F0}}{C_F}) \label{equ:T}
+\end{equation}
+
+mit:\\
+
+$R_{T0}$ = totale Widerstand des Referenzwassers\\
+$R_F$ = Reibungswiderstand für die tatsächliche Wassertemperatur und Salzgehalt\\
+$C_{F0}$ = Reibungswiderstandskoeffizienten des Referenzwassert\\
+$C_F$ = Reibungswiderstandskoeffizient für das aktuelle Wasser\\
+
+Mit Hilfe der Formel () + () + () kann nun der Gesamtwiderstand nach ITTC - Recommended Procedures and Guidelines berechnet werden.\\
+
+
+\subsubsection{Theorie von Maruo}
+
+ In der ISO (2002) wird für die Berechnung des zusätzlichen Widerstands durch Wellen die Marou Theorie genauer erläutert.
+
+\begin{eqnarray}
+\frac{\Delta r_1}{\zeta_A^2} = \frac{\rho}{4 \pi_A^2}[ -\int\limits_{-\infty}^{m1}+\int\limits_{m2}^{m3}+\int\limits_{m4}^{\infty}]\frac{k_u(m)(m-k cos \chi)}{\sqrt{k_u^2 (m) - m^2}} (|C(m)|^2)+(|S(m)|^2) dm in[N/m^2]\\
+\left. \frac{m1}{m2} \right\rbrace = -\frac{k_0}{2}  (1+2\tau\pm\sqrt{1+4\tau})\\
+\left. \frac{m3}{m4} \right\rbrace = \frac{k_0}{2}  (1+2\tau\mp\sqrt{1-4\tau})
+k_u (m) = -\frac{(m+k_0\tau)^2}{k_0}
+\tau = \frac{V_S\omega_e}{g}
+\end{eqnarray}
+
+wobei:\\
+
+g = Erdbeschleunigung in [$m/s^2$]\\
+k = Wellenzahl (=$\omega^2/g$) in [1/m]\\
+$k_0$ = Wellenzahl (=$g/V_S^2$) in [1/m]\\
+$V_S$ = Schiffsgeschwindigkeit in [m/s]\\
+$\Delta r_1$ = die Widerstandserhöhung durch regulären Seegang in [N]\\
+$\zeta_A$ = Wellenamplitude in [m]\\
+$\rho$ = Dichte des Wassers in [kg/$m^3$]\\
+$\omega_e$ = die Kreisfrequenz der der Begegnung in [Rad/sek]\\
+C(m) = symetrische KOCHIN Funktion in [$m^2$/sek] \\
+S(m) = asymethrische KOCHIN Funktion in [$m^2/sek$]\\
+
+es wird angenommen, dass $m_3$ = $m_4$ bei $\tau$ = 1/4\\
+
+Die KOCHIN Formel wird aus der singulären Verteilung bestimmt, die ein Schiff im Strömungsfeld beschreibt:
+
+\begin{eqnarray}
+C(m) = \int\limits_{L}Q(x)e^{imx} dx\\
+S(m) = \int\limits_{L}D(x)e^{imx} dx
+\end{eqnarray}
+
+wobei Q(x) und D(x) die Stärke der Quellen und der Dipole in X-Richtung angeben. Diese werden mit der Streifenmethode, der Potentialtheorie oder anderen alternativen Methoden bestimmt.\\
+
+Diese Theorie basiert auf Annahme eines schlanken Schiffskörpers. Für stumpfe Schiffskörper können dadurch keine genauen Ergebnisse erzielt werden. Stumpfe Schiffskörper können mit der Faltensin-Formel oder der Kwon-Formel abgeschätzt werden.\\
+
+Die Komplexität der Theorie von Maruo ist an der Grundformel erkennbar. Die Implementierung wird dadurch erschwert. Zudem besteht, aufgrund der Vielzahl von Variablen, eine hohe Möglichkeit von mathematischer Ungenauigkeit. Zudem erzielt die Theorie nur bei schlanken Schiffstypen die genauesten Ergebnisse. Für stumpfe Schiffskörper kann die Faltensin-Formel angewendet werden.\\
+
+
+
+\section{empirische Methoden}
+
+\subsection{Aertssen-Formel}
+
+Für eine einfache Abschätzung der Geschwindigkeitsverluste kann die \grqq Aertssen-Formel \grqq angewendet werden:\\
+
+\begin{eqnarray}
+\frac{\Delta V_S}{V_S} \cdot 100\% = \frac{m}{L_{pp}} + n
+\end{eqnarray}
+
+$m$ und $n$ = Faktoren, die mit der Beaufort-Skala variiren:\\
+
+\begin{table}[h]
+\caption{Werte für $m$ und $n$} \centering
+\begin{tabular}{|c|c c|c c|c c|c c|}
+\hline
+&\multicolumn{2}{|c|}{$0$ bis $30^\circ$} &\multicolumn{2}{|c|}{$30$ bis $60^\circ$} &\multicolumn{2}{|c|}{$60$ bis $150^\circ$} &\multicolumn{2}{|c|}{$150$ bis $180^\circ$}\\
+
+\hline
+$BN$		&m		& n 	&m 		&n 		&m 		&n 	&m 		&n\\
+\hline
+5			&900l	& 2		&700	&2		&350	&1	&100	&0\\
+\hline
+6			&1300l	& 6		&1000	&5		&500	&3	&200	&1\\
+\hline	
+7			&2100	& 11	&1400	&8		&700	&5	&400	&2\\
+\hline
+8			&3600l	& 18	&2300	&12		&1000	&7	&700	&3\\
+\hline
+
+\end{tabular}
+\label{tab:meinetabelle}
+\end{table}
+
+Dabei wird jedoch nicht beachtet, um welchen Schiffsstyp es sich handelt, oder unter welchen Beladungszustand sich das Schiff bewegt \cite{SRP2011}.
+
+
+\subsection{Kwon-Formel}
+
+Darauf aufbauent, entwickelten Professor Kwon und Doktor Townsin ihre approximierte Formel für die Abschätzung der Widerstandserhöhung.  Einen verweis auf diese Methoe befinet sich auch in der ISO 15016 (2002). Die Basis dieser Formel bildeten, die Berechnungen durch den von Wind verursachten Geschwindigkeitsverlust durch van Berlekom. Die Berechnungen zur Bewegungen von Maruo, der Widerstand durch die Wellenreflexion von Kwon selbst und die empirischen Daten der Serie 60. Auf dieser Basis entstand die \grqq Townsin-Kwon-Formel\grqq :\\
+
+
+\begin{eqnarray}
+\alpha \cdot \mu \frac{\Delta V_S}{V_S} 100 \%
+\end{eqnarray}
+
+mit:\\
+
+$\alpha$ = Korrekturfaktor für Blockkoeffizient und Froude-Zahl aus Tabelle 1\\
+$\mu$ = Reduktionsfaktor für die Windrichtung\\
+$\Delta V$ = Geschwindigkeitsverlust durch das Wetter / Wind\\
+$V$ = design service speed\\
+
+
+\begin{table}[h]
+\caption{Werte für den Korrekturwert $\alpha$} \centering
+\begin{tabular}{|c||c||c|}
+
+\hline
+$C_B$		&Bedingungen	& $\alpha (Korrekturfaktor)$\\
+\hline
+0,55		&normal		& $1,7 - 1,4 F_n - 7,4(F_n)^2$\\
+\hline
+0,6			&normal		& $2,2 - 2,5 * F_n - 9,7 * (F_n)^2$\\
+\hline	
+0,65		&normal		& $2,6 - 3,7 * F_n - 11,6 * (F_n)^2$\\
+\hline
+0,7			&normal		& $3,1 - 5,3 * F_n - 12,4 *(F_n)^2$\\
+\hline
+0,75		&beladen / normal	& $2,4 - 10,6 * F_n - 9,5 (F_n)^2$\\
+\hline
+0,8			&beladen / normal	& $2,6 - 13,1 * F_n - 15,1 * (F_n)^2$\\
+\hline
+0,85		&beladen / normal	& $3,1 - 18,7 * F_n + 28 * (F_n)^2$\\	
+\hline
+0,75		&ballast		& $2,6 - 12,5 * F_n - 13,5 * (F_n)^2$\\	
+\hline
+0,8			&ballast		& $3,0 - 16.3 * F_n - 21,6 * (F_n)^2$\\
+\hline
+0,85		&ballast		& $3,4 - 20,9 * F_n + 31,8 * (F_n)^2$\\
+\hline
+\end{tabular}
+
+\label{tab:meinetabelle}
+\end{table}
+
+Aufgrund der basierenden Daten, ist die Townsin-Kwon-Formel nur für einen Blockkoeffizienten von $C_B$ von 0,55 bis 0,85 und der Froude-Zahl $F_N$ von 0,05 bis 0,3 anwendbar.
+
+Für den Geschwindigkeitsverlust durch den Wind sind folgende Formeln anwendbar:\\
+
+Für ein $C_B$ = 0,75 bis 0,85 für beladene Schiffe (außer Containerschiffe):
+
+\begin{equation}
+\frac{\Delta}{V} 100 \% = 0,5 BN + \frac{BN^(6.5)}{2,7 \bigtriangledown^(2/3)}
+\end{equation}\\
+
+Für $C_B$= 0,75 bis 0,85 für Schiffe mit Ballastwasser (außer Containerschiffe):
+
+\begin{equation}
+\frac{\Delta}{V} 100 \% = 0,7 BN + \frac{BN^(6.5)}{2,7 \bigtriangledown^(2/3)}
+\end{equation}\\
+
+Für $C_B$ = 0,55 bis 0,7 Schiff im Design Tiefgang (nur Containerschiffe):
+
+\begin{equation}
+\frac{\Delta}{V} 100 \% = 0,7 BN + \frac{BN^(6.5)}{22 \bigtriangledown^(2/3)}
+\end{equation}\\
+
+BN = Beaufort-Zahl
+$\bigtriangledown$ = Verdrängung\\
+
+Um den Effekt zu beachten, der durch die Windrichtung gegeben ist, werden die nachfolgenden Gleichungen angewendet:
+
+\begin{eqnarray}
+2 \mu_{vorn} = 1,7 - 0,03 (BN - 4)^2\\
+2 \mu_{seitlich} = 0,9 - 0,06 (BN - 6)^2\\
+2 \mu_{folgend} = 0,4 - 0,03 (BN - 8)^2
+\end{eqnarray}
+
+Beide Formel bieten die Möglichkeit, schnell und einfach den zusätzlichen Widerstand abzuschätzen. Dabei sind jedoch die Grenzen, wie Schiffstyp und Geschwindigkeit zu beachten. Zudem findet das Seegangsspekrtum keinen Einfluss in den Näherungsformeln. Es wird also nicht direkt betrachtet, ob sich das Schiff in der Nordsee oder Rotem Meer bewegt. Der einzige Zusammenhang zwischen Wind und damit der Bildung von Wellen wird über die Beaufort-Skala erreicht.\\
+
+Um jetzt den Geschwindigkeitsverlust in einen Energieverlust umzurechnen, geben Townsin und Kwon folgende Approximationsformel an:\\
+
+\begin{equation}
+\frac{\Delta P}{P} = (n+1) \frac{\Delta V}{V}
+\end{equation}\\
+ 
+Dabei wird folgendes $n$ gegeben:\\
+
+für große Tanker im beladenen Zustand: $n$=1,91\\
+für großte Tanker mit Ballastwasser: $n$ = 2,40\\
+und Containerschiffe: $n$ = 2.16\\
+
+Aufgrund der Betrachtung aller Faktoren, wie Schiffstyp, Beladungszustand, Windstärke und -richtung, wurde die Townsin-Kwon Formel implementiert. Die Vorteile sind, die eine einfache und zudem komplette Betrachtung aller Anteile, Korrekturen und zudem der Zusammenhang der Windrichtung.\\
+
+\subsection{Lloyd}
+
+Auch Lloyd beschreib in seinem Buch \grqq  Seakeeping - ship behavior in rough weather \grqq, dass sich der Gesamtwiderstand aus dem Glattwasserwiderstand und zusätzlich dem Widerstand durch Wellen zusammensetzt.
+
+\begin{eqnarray}
+R=R_C+R_{aw}  [kN]
+\end{eqnarray}
+
+$R$ = Gesamtwiderstand\\
+$R_C$ = Glattwasserwiderstand\\
+$R_{aw}$ = zusätzlicher Widerstand durch Wellen\\
+
+Er gibt dort einmal den Widerstand verursacht durch eine Welle an:
+
+\begin{eqnarray}
+2C_{aw} S_\zeta (\omega_e ) dw_e in  [kN]
+\end{eqnarray}\\
+Wobei der Widerstandskoeffizent dann wie folgt definiert ist:
+
+\begin{eqnarray}
+  C_{aw}= \frac{R_{aw}}{(\zeta_0^2 )}  in [kN/m^2 ]
+\end{eqnarray}\\
+
+und dem Widerstand durch irregulärem Seegang:
+
+\begin{eqnarray}
+R_{aw}=2\int\limits_{0}^{\infty}C_{aw} S_\zeta (\omega_e ) d\omega in [kN]
+\end{eqnarray}
+
+$R_{aw}$= Widerstand \\
+$C_{aw}$= Widerstandsbeiwert des zusätzlichen Widerstands bei Wellen\\
+$S_\zeta (\omega_e ) d\omega$ = Seegangsspektrum in Abhängigkeit mit der Wellenfrequenz\\
+
+Der Vorteil dieser Methode, ist die recht einfache Bestimmung des Widerstandes verursacht durch eine Welle oder durch ein Wellenspekrtum. Hierbei wird aber nicht mitbeachtet, in welche Richtung sich die Wellen zum Schiff hin bewegen. Mit dieser Methode kann also nur der maximale Widerstandzuwachs berechnet werden, wenn die Wellen von vorne kommen. Zudem muss der Widerstandsbeiwert $C_{aw}$ des zu berechnenden Schiffes vorab bekannt sein.
+
+Für die Berechnung für den durch Wind verursachten Widerstand ist folgende Formel gegeben:\\
+
+\begin{eqnarray}
+ D_w = C_D \cdot 0,5 \cdot \rho_A (U+U_w )^2 \cdot A_S in [kN]
+\end{eqnarray}
+
+wobei:\\
+
+$D_W$ = Widerstand Wind\\
+$C_D$ = Widerstandskoeffizient\\
+$\rho_A$ = Dichte Luft in $[t / m^2]$\\
+$U$ = Geschwindigkeit des Schiffes in $[m / s]$\\
+$U_W$ = GEschwindigkeit des Windes in [m/s]\\
+$A_S$ = Gesamtangriffsfläche des Windes am Überwasserschiff in $[m^3]$\\
+
+Der Nachteil dieser Methode ist es, dass kein Zusammenhang zwischen Wind und Wellen dargestellt wird. Zudem muss $C_D$ als Widerstandkoeffizient erst durch Windkanaltests bestimmt werden. Auch findet die Windrichtung keine Beachtung, es sei denn, der Widerstandskoeffizient wird in Verbindung mit der Windrichtung bestimmt. Der Vorteil ist auch hier die einfache Bestimmung der meisten Widerstände.\\
+
+\subsection{Faltinsen Formel}
+
+Die ISO 2002 bietet, neben der Maruo Theorie, noch eine weitere Methode zur Berechnung des zusätzlichen Widerstandes an. In kurzen Wellen und bei einem völligen Schiff kann die Faltinsen Formel zur Berechnung verwendet werden:
+
+\begin{align} \label{equ:pegew}
+\begin{split}
+\frac{\Delta r_2}{\zeta_A^2} = \frac{1}{2} \rho g \alpha_1[\int\limits_{|}[sin^2(\chi - \theta)-\frac{2\omega V_S}{g}[cos \chi - cos \theta cos(\chi - \theta)]] sin \theta dl
+\\
+ +\int\limits_{||}[sin^2(\chi - \theta)-\frac{2\omega V_S}{g}[cos \chi + cos \theta cos(\chi - \theta)]] sin \theta dl
+\end{split}
+\end{align}
+
+wobei:\\
+
+$d$ = Tiefgang in [m]\\
+$l_1$ und $k_1$ die modifizierte Bessel Funktion\\
+l = Koordinate entlang der Wasserlinie in [m]\\
+$\alpha_1$ = der Tiefeneinflussfaktor \\
+= $\frac{\pi^2 l_1^2 (1,5kd)}{\pi^2 l_1^2 (1,5kd+K_1^2(1,5kd)}$\\
+$\Delta r_2$ = Erhöhung des Widerstand durch das Durchbrechen regulärer Wellen in [N\\
+$\theta$] = Winkel zwischen der Tangente der Welle und der Körperachse in [Rad]\\
+$\omega_e$ = die Kreisfrequenz der der Begegnung in [Rad/sek]\\
+
+Die FALTINSEN Formel betrachtet dabei nur Wellen von vorne kommend oder von der Seite. Die Annahme, dass Wellen an der Schiffsaußenhaut refelktiert werden, trifft nicht mehr zu, sobald die Wellen $\theta < \pi/2 rad$ erreichen.Das bedeutet, sobald $\theta$ < $\pi /2 rad$ wird $\Delta r_2$ = 0. \\  
+
+\subsection{Approximierte Salvensen Methode}
+
+Um eine einfache Formel für die Berechnung des durch Wellen verursachten Widerstandes zu erhalten, kombinierten die Autoren Matulja, Sportelli,Guedes Soares und Prpi\'{c} - Or\v{s}i\'{c}, in ihrer Veröffentlichung \grqq Estimation of Added Resistanceof a Ship in Regular Waves \grqq folgenden Ansatz. Sie kobinierten die Salvensen Methode mit einer angenähert Faltinsen Formel für die Wellenreflektion. Sie weisen darauf hin, dass das eine semi-empirische Methode ist, und keine reine theoretische Form besitzt. Dieser Ansatz dient als reines  \grqq Werkzeug \grqq. \cite{MSSO}\\
+
+Ausgehend von der Salvensen Formel:\\
+
+\begin{eqnarray}
+R = \frac{1}{2}\rho g (1+\frac{2\omega U}{g})\int\limits_{L_1}^{} sin^2 \upsilon n_1 dl
+\end{eqnarray}
+
+wobei:\\
+
+$L_1$ = Länge der Wasserlininfläche\\
+$n_1$ = ist die x-Komponente der aktiven Normalen n zur Wasserlinie\\
+$\upsilon$ =  der Winkel zwischen der Tangente an die Wasserlinie und der x-Achse
+
+Darauf aufbauend und mit den Vereinfachungen, dass die Geschwindigkeit der Anströmung bei 180 Grad zum Schiff am schnellsten und bei 90 Grad am geringsten ist. Sowie der approximierten Faltensen Methode, reduziert sich der Ansatz zu folgender dimensionslosen Gleichung:
+
+\begin{eqnarray}
+\frac{R_{AW}}{\rho \cdot g \cdot \zeta_a^2 \cdot B / L_{pp}}
+\end{eqnarray}
+
+mit:
+
+$R_{AW}$ = Gesamtwiderstand durch Wellen\\
+$\rho$ = Dichte des Wassers\\
+$g$ = Erdbeschleunigung\\
+$\zeta_a$ = Wellenamplitude\\
+$B$ = Breite des Schiffes\\
+$L_{pp}$ = Länge zwischen den Loten\\
+
+Aus dieser Gleichung, kann bei bekannten Widerstand $R_{AW}$ leicht der dimensionlose Widerstandskoeffizient bilden.\\
+
+Bei den Untersuchungen der Salvensen-, Faltensen- und der approximierten Methode, wurde festgestellt, dass der maximale Widerstand bei einer Wellenlänge etwa gleich zu Schiffslänge (L/$\lambda = 1$) auftritt. Desweiteren, dass bei geringen Geschwindigkeit die Faltensen Methode einen geringeren Widerstand als die Salvensenmethode vorausagt, dagegeen bei höheren Geschwindigkeiten auch einen höheren Widerstand. Im Vergleich mit experimentell ermittelten Daten zeigte sich, dass die Faltensen Methode genauerer Ergebnise erzeitl, als die Salvensen. Für kleinere Wellenlängen ist es besser die approximierte Methode anzuwenden, als die Salvensen Methode.\\
+
+Insgesamt zeigt die approximierte Methode gute Ergebnisse bei der Bestimmung des zusätzlichen Widerstandes. Sie ist einfach anzuwenden und auch der Seegangsspekrtum wird bei der Berechnung beachtet. Durch die Vereinfachung, wird dagegen die Wellenrichtung vernachlässigt. Zu beachten ist zusätzlich, dass diese Methode nur bei schlanken Schiffen angewendet werden kann, da die Thorien von Salvensen und Faltensen auf schlanke Schiffstypen basieren. Somit werden bei der Berechnung mit Bulkern nur ungenauer Ergebnisse berechnet.\\
+
+
+\subsection{Schneekluth}
+
+
+\% SIEHE BUCH INFO WIDERSTAND DURCH WELLEN HIER NICHT VOLLSTÄNDIG \%\\
+
+
+Unter der Annahme, dass der Wind eine Längskraft verursacht und der größte Widerstand bei Wind von vorn auftritt, gibt Schneekluth in seinem Buch\grqq Ship design for efficiency and economy \grqq die bekannte Widerstandsformel an \cite{Skluth1998}:
+
+\begin{eqnarray}
+R_{AA}=C_{AA} \cdot \frac{\rho_A}{2}\cdot V_A^2 \cdot A_V
+\end{eqnarray}\\
+
+$C_{AA}$ = Luftwiderstandsbeiwert (0,7...1,3)\\
+$R_{AA}$ = Windwiderstand\\
+$\rho_A$ = Dichte der Luft = 1,226 in [$kg/m^3$]\\
+$V_WR$ = Luftgeschwindigkeit = Windgeschwindigkeit + Schiffsgeschwindigeit bei Wind von vorn\\
+$A_XV$ = Lufthauptspant\\
+
+Die Ermittlung des Luftwiderstandsbeiwertes erfolgt auch hier durch Windkanalversuche. Eine genaue Methode betrachtet Aufbauten und Rumpf getrennt. Bei Containerschiffen und anderen Schiffen mit hohen aufbau, kann der luftwiderstand mehr als 2 \% des gesamtwiderstandes betragen. Bei einem von der Seite angeströmtes Schiff, kann mit Widerstandsbeiwert von $C_{AA}$ = 1,2...1,3) gerechnet werden. Der größte Widerstand herrscht nicht bei wind von vorne, sondern bei einkommenden wind von 30-40 grad. Der Grund dafür, weil die windbahnen ungebremst auf hintereinanderliegende Aufbauten bzw. Deckshäuser treffen. Bei achterlichem wind ist die schubkraft geringer, als die bremsraft, wenn wind von vorn kommt. Desweiteren verweist Schneekltuh auf die Probefahrtzuschläge nach de Jong und Fransen (NSMB) niederländische Versuchsanstalt in Wgeningen. Dort wurde durch empirische Ermittlungen folgender Zusammenhang erstellt:\\
+
+\begin{eqnarray}
+C[\%]= 5,75 - 0,793 \bigtriangleup^{1/3}+12,3W+(0,0129 Lpp-1,864 W) \lambda^{1/2}   
+\end{eqnarray}
+
+mit:\\
+
+$C$ = Zuschlag in Prozent\\
+$\bigtriangleup$ = Deplacement in metrische Tonnen\\
+$W$ = Windstärke nach Beaufort\\
+$\lambda$ = Modellmaßstab\\
+
+\subsection{Kreitner-Formel}
+
+In den ITTC Recommended Procedures and Guidelines 7.5-04-01-01.2 von 2005, gibt die ITTC mit der Kreitner-Formel, eine weitere Möglichkeit, den zusätzlichen Widerstand zu berechnen. Diese Formel ist aber nur bei Wellenhöhen von 1,5 bis 2 Meter anwendbar. Zudem folgt die Anströmung nur von Vorne.\\
+
+\begin{equation}
+\Delta R_T = 0.64 \xi_{w^2} B^2 C_B \rho 1/L \label{equ:T}
+\end{equation}\\
+
+$\xi_w$ = Wellenhöhe [in Meter]\\
+$\rho$  = ist die Dichte des Wassers [in Newton je Kubikmeter]\\
+ L = Länge des Schiffes [in Meter]\\
+ 
+
+Diese Formel wurde bis zur Aktualisierung der ITTC  Recommended Procedures and Guidelines 7.5-04-01-01.2 im Jahre 2012 empfohlen. Nach der Überarbeitung wurde Sie aus den Richtlinien entfernt.\\
+
+Die Vorteile dieser Gleichung sind die relativ einfache Anwendung und Berechnung. Es werden wenig Daten zur Berechnung gefordert und die Formel ist leicht implementierbar. Eindeutiger Nachteil ist die begrenzte Anwendung aufgrund der gegebenen Wellenhöhe, sowie der Anströmung aus einer Richtung. Die Widerstandserhöhung durch Seegang von der Seite oder achterlicher Seegang, könnnen mit dieser Formel nicht berechnet werden.\\
+
+\section{numerische Methoden}
+
+\subsection{Boese}
+
+Boese-Verfahren \cite{Boese1970} ist ein sogenanntes Druck Integrationsverfahren. Der zusätzliche Widerstand als der zeitliche Mittelwert des integrierten berechnet Druck. Boese geht davon aus, dass der durch die Tausch- und Stampfbewegungen hervorgerufene ozillierende Druck an jeder Stelle der benetzten Oberfläche bekannt ist. Diese Methode wird mit hilfe der Streifenthorie angewendet [vgl.]\cite{Alex2009}.
+Über das Integral der benetzten Schiffsoberfläche wird die resultierende Kraft berechnet:
+
+\begin{eqnarray}
+\overrightarrow {P_x(t)} = P_{XA} e^{i \omega_e t} \label{equ:T}
+\end{eqnarray}
+
+und:
+
+\begin{eqnarray}
+\int\limits_{S} \overrightarrow {p_a} k_x dS \label{equ:T}
+\end{eqnarray}
+
+wobei:\\
+
+$ \overrightarrow {p_a}$ = komplexe Amplitude\\
+$\omega_e$ = Begegnungsfrequenz\\
+$k_x$ = Richtungskosinus der Oberflächennormalen\\
+
+Dabei wird das Intergal über ein schiffsfestes System berechnet. Infolge der Stampfbewegungen erhält jedes Oberflächenelement einen Neigungswinkel $\theta$. 
+Boese teilt die auftretenden Effekte in Effekte erster und zweiter Ordnung ein. Er begrenzt das Intergal bis zur Ruhewasserlinie, weil diese Effekte erster Ordnung dominieren und die Seitenwände des Schiffes im Bereich der Wasserlinie wenig geneigt sind und dadruch einen geringeren BEitrag zu Vertikalkarft leisten. Dadurch ist es möglich, dass die vertikale Druckkraft $P^*$ aus der Bewegungsrechnung ermittelt wird. Dies ist der erste Widerstandsanteil:
+
+\begin{eqnarray}
+P_z^* = m \omega_e^2 [Z_0(t) + x_s \theta (t)] \label{equ:T}
+\end{eqnarray}
+
+dabei ist:
+
+$m$ = Schiffsmasse\\
+$Z_0 = \overrightarrow {Z_OA} e^{i \omega_e t}$ = Tauchbewegung am Punkt 0\\
+$x_S$ = Schwerpunktabstand von Punkt 0\\
+
+Die mittlere Längskraft aus den Bewegungsgrößen erfolgt somit:
+
+\begin{eqnarray}
+\overline {P^*_{xo}} = \frac{1}{2} m \omega*_e [(z_{0A1}+x_s \theta_{A1}) \theta_{A1} + (z_{0A2} + x_s \theta_{A2}) \theta_{A2}] \label{equ:T}
+\end{eqnarray}
+
+oder einfacher nach Alexanderson \cite{Alex2009}:
+
+\begin{eqnarray}
+R_{aw1} = \frac{\rho \cdot g}{2} \int\limits_{L} V^2_{zb} \cdot (\frac{\delta y_w}{\delta x_b}) \delta x_b \label{equ:T}
+\end{eqnarray}
+
+mit:
+
+$R_{aw1}$ = erster Widerstandsanteil\\
+$V_{zb}$ = Vertikal Relativgeschwindigkeit zwischen dem Streifen und Wasser\\
+$x_b$ = x-Koordinate am Schiff\\
+$y_w$ = y-Koordinate Wasserlinine\\
+
+Für den zweiten Widerstandsanteil werden die Kräfte betrachtet, die nur zeitweise an der benetzten Oberflähce entstehen. Boese korrigiert den Fehler, der durch die Berechnung des ersten Widerstandsanteil entstanden ist, das dort nur die Ruhrlage betrachtet wurde. Die Deformation der Welle durch das Schiff wird dabei nicht berachtet. Durch die Realtivbewegung zwischen der Ruhe-Wasserlinie und der Wasseroberfläche, die von  der Wellenamlitude $\zeta_A$ und Wellenzahl $k$ abhängig ist, und einer einer ozilierenden Bewegung, läßt sich der Widerstand zweiter Ordnung wie folgt zusammenfassen:
+
+\begin{eqnarray}
+\overline {P^{**}_{xo}} = \frac{1}{4} \rho g \int\limits_{L} [s^2_{A1}(x) + s^2_{A2} (x)] k_{xo} (x) dx \label{equ:T}
+\end{eqnarray}
+mit:
+
+$\overline {P^{**}_{xo}}$ = zweiter Widerstandsanteil\\
+$s$ = Relativbewegung\\
+
+Alexanderson vereinfachte diesen Ansatz zu:
+
+\begin{eqnarray}
+R_{aw2} = \frac{1}{T_e} \int\limits_{0}^{T_e} \rho \cdot \bigtriangledown  \cdot \ddot \eta_3 \cdot \eta_5 \cdot \delta t \label{equ:T}
+\end{eqnarray}
+
+mit:
+
+$T_e$ = 
+$  \rho \cdot \bigtriangledown  \cdot \ddot \eta_3$ = Vertikalkräfte am Schiff\\
+$ \eta_5$ = Neigungswinkel bei kleinen Winkel = $sin (\eta_5) = \eta_5$\\
+
+
+Und dadurch wird der gesamte Widerstand durch Wellenbewegung nach Boese bestimmt:
+
+\begin{eqnarray}
+\overline{P_xo} = P^{*}_{xo}+P^{**}_{xo} \label{equ:T}
+\end{eqnarray}
+
+oder nach Alexanderson:
+
+\begin{eqnarray}
+R_{aw} = R_{aw1} + R_{aw2} \label{equ:T} \label{equ:T}
+\end{eqnarray}\\
+
+\subsection{Gerristma und Beukelman}
+
+Gerristma und Beukelman gingen von einem anderen Ansatz aus, bei der Berechnung des zusätzlichen Widerstandes. Um den Energiefluß am Rumpf zu berechnen gingen sie von einem schwingenden System aus. Das Schiff bewegt sich wie eine schwingende Masse, die durch die Auf-und-Ab-Bewegung angeregt wird. Diese Masse wird durch die Wellen \grqq gedämpft \grqq. Dieser einfache Ansatz berechnet den Energiefluss, der abgestrahlt wird, wenn sich das Schiff durch eine Welleperiode $Te$ bewegt. Deshalb wird dieses Verfahren ein Strahlungsenergieverfahren. Es wird angenommen, dass, um Aufrechterhaltung einer konstanten Geschwindigkeit vorwärts Schiff sollte diese Energie durch den Schiffsantrieb Anlage geliefert werden. Hier wird, wir bei der Streifenmethode, die Bewegung einzelner Streifen betrachtet. Der Nachteil dieser Methode, keine Betrachtung von Roll und Gierbewegungen, sowie ausschließliche Wellen von vorne. [vgl.]\cite{zakaria} und \cite{Alex2009}:\\
+\\
+
+\begin{equation}
+\int\limits_{0}^{Te} \int\limits_{0}^{L} b^1 V_z^2 dxdt  \label{equ:T}
+\end{equation}
+
+wobei:
+
+\begin{equation}
+b' = (b_n - U \frac{\delta a_n}{\delta x}) \label{equ:T}
+\end{equation}\\
+
+$b'$ = \\
+$b_n$ und $a_n$  = Dämpfungskonstante bei einem  zweidimensionalen Schnitt\\
+$T_e$ = Wellenperiode der Begegnung\\
+$L$ = Schiffslänge\\
+$U$ = Schiffsgeschwindigkeit\\
+$V$ = realtive Geschwindigkeit eines Abschnitts in dem Fluid\\
+
+
+\begin{equation}
+V_z = z - (x - x_G) \theta + U \theta - \zeta * + U \frac{\delta \zeta^*}{ \delta x} \label{equ:T}
+\end{equation}
+
+mit:\\
+
+$\theta$ = Drehwinkel um die Querachse durch das Zentrum Schwerpunkt\\
+$\zeta$ = die Höhe der Wasseroberfläche durch die einfallenden Welle\\
+$G$ = Greensche Funktion\\
+
+Aus der Formel ist erkennbar, das bei dieser Methode nur das Hieven und die Nickbewegung betrachtet wird. Aus der Symmetrie wird nur die Hälfte über die Länge des Schiffes betrachtet. $y_{yz}$ ist die halbe Breite des Längsschnittes und $y_{WL}L$ die halbe Wasserlininefläche des Längschnittes.Mit der Wellenzahl $k$ folgt:
+
+\begin{equation}
+\zeta^* = \zeta (1- \frac{k}{y_{WL}} \int y_z e^{kz} dz) \label{equ:T}
+\end{equation}
+
+Gerristma und Beukelman zeigen, dass die zusätzliche Arbeit gleich der eingestrahlten Energie ist:
+
+\begin{equation}
+E = R_{AW} (U+c)T_e = \lambda.R_{AW}  \label{equ:T}
+\end{equation}
+
+mit:
+
+$c$ = Wellenfortschrittsgeschwindigkeit\\
+$\lambda$ = Wellenlänge\\
+
+Mit den Gleichungen (X.X) und (X.X) läßt sich die Formel zusammenfassen zu:
+
+\begin{equation}
+R_{AW} = \frac{k}{y_WL} \int\limits_{0}^{Te} \int\limits_{0}^{L} b^1 V_z^2 dxdt = \int\limits_{L} \frac {k}{2 \omega_e} (b_n - U \frac{\delta a_n}{\delta x}) V_{za}^2 dx  \label{equ:T}
+\end{equation}\\
+
+\subsection{Salvensen methode}
+
+Die approximierte Salvesen Formel beruht auf die Salvesen Methode [vgl.] \cite{MSSO}. Diese Methode gilt als grundlegendes Werkzeug zur Berechnung des Widerstandes mit Hilfe der Streifen Theorie. Aus der Grundgleichung:
+
+\begin{equation}
+R = -\frac{i}{2}k cos \beta \sum_{j=3,5} \zeta_j [F_j^{I*} + F_j^D] + R_7  \label{equ:T}
+\end{equation}
+
+$F_j^{I*}$ ist die komplex konjungierte Form des Froude - Krilov Teils der existierenden Kraft und Moment. $F_j^D$ ist die komplex konjugierte Form des Potential der einfallenden Welle. Daraus wird die Formel für den zusätzliche Widerstand gebildet:
+
+\begin{equation}
+R_7 = -\frac{1}{2} \zeta_a^2 \frac{\omega^2}{\omega_e}k cos \beta \int\limits_{L} e^{-2kds} (b_{33} + b_{22} sin^2 \beta) dx  \label{equ:T}
+\end{equation}
+
+wobei:
+
+$R$ = Widerstand aller Freiheitsgrade\\
+$R_7$ = zusätzliche Widerstand \\
+$k$ = Wellenzahl\\
+$\beta$ = Winkel der Wellenrichtung\\
+$L$ = Schiffslänge\\
+$\omega_e$ = Begegnungsfrequenz\\
+$b$ = Dämpfungskoeefizient\\
+
+Diese Methode findet Anwendung bei der Berechnung der Kräfte und Momente bei schrägeinlaufender regelmäßigen Wellen.
+
+\section{CFD-Anwendungen}
+
+\section{Implemtierung}
+
+\section{Vergleich und Auswertung}
+
+\chapter{Zusammenfassung}
+

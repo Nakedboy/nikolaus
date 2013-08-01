@@ -1,0 +1,93 @@
+\chapter{Beispiele}
+
+\section{...für eine Liste}\label{sec:Liste}
+
+Der Glattwasserwiderstand setzt sich in der Summe aus den wesentlichen Widerstandsanteilen
+\begin{compactitem}
+ \item Reibungswiderstand $R_F$
+ \item viskose Druckwiderstand $R_{VD}$
+ \item Wellenwiderstand $R_W$
+\end{compactitem}
+zusammen. 
+
+\section{...für eine Tabelle}
+
+ \begin{table}[h!]
+\caption[Schiffsdaten der \textit{Alianca Bahia}]{Schiffsdaten der \textit{Alianca Bahia}}\centering
+\begin{tabular}{l r c}
+ \toprule
+    % \multicolumn{2}{l}{Schiffsparameter}    &    \\\midrule
+    $L_{oa}$ & Länge über alles & $201,04\,m$ \\
+    $L_{pp}$ & Länge zwischen den Loten & $189,60\,m$ \\
+    $B$ & Breite & $29,80\,m$ \\
+    $D$& Seitenhöhe & $16,50\,m$ \\
+    $T_d$ & Designtiefgang & $10,10\,m$ \\    
+    $T_s$ & Maximaltiefgang & $11,55\,m$ \\
+\bottomrule 
+\end{tabular}
+\label{tab:Schiffsdaten}
+\end{table}
+\clearpage
+\section{...für Gleichungen}
+\subsection{Einzeiler}
+\begin{equation}
+ \Delta=\rho\cdot\nabla \label{equ:T}
+\end{equation}
+
+\subsection{Mehrzeiler}
+\begin{eqnarray}
+ g\cdot\Delta=g\cdot\rho\cdot\nabla\\
+ G = B
+\end{eqnarray}
+
+oder
+
+\begin{align}\label{equ:pegew}
+\begin{split}
+ g\cdot\Delta &=g\cdot\rho\cdot\nabla\\
+ G &= B
+\end{split}
+\end{align}
+\clearpage
+\section{...für Abbildungen}\label{sec:Tabelle}
+\subsection{Einzelbild}
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.8\textwidth]{./figures/bugwulst_abmessungen2.pdf}
+  \caption[Bugwulstparameter nach Kracht]{Bugwulstparameter nach Kracht, Quelle: veränderte Darstellung nach \cite{Kracht}}\label{fig:BugwulstKracht}
+\end{figure}
+
+\subsection{Gruppenbilder}
+\begin{figure}[h!]
+\subfigure[Bugansicht]{\includegraphics[width=0.49\textwidth]{./figures/bug.png}}\hfill
+\subfigure[Heckansicht]{\includegraphics[width=0.49\textwidth]{./figures/heck.png}}
+\caption[CFD-Ergebnis]{CFD-Ergebnis eines $14\,000\;TEU$ Containerschiffes}\label{fig:cfd}
+\end{figure}
+\clearpage
+\section{...für Verweise}
+\subsection{Bezüge}
+z.B.:\\
+siehe Abschnitt \ref{sec:Liste}\\
+In Tabelle \ref{tab:Schiffsdaten}...\\
+Die Gleichungen \ref{equ:T} und \ref{equ:pegew}....\\
+Die Grafik \ref{fig:cfd} in Abbildung \ref{fig:cfd}....
+
+\subsection{Zitieren/Quellenangabe}
+
+In \cite{Schiffstechnik} werden einige rudimentäre Grundlagen des Schiffbaus beschrieben.
+
+Die Abbildung \ref{fig:BugwulstKracht} enthält eine veränderte Darstellung nach \cite{Kracht}.
+
+\chapter{Los geht's}
+
+Nun nach einigen Beispielen, sind Sie an der Reihe, diese Seiten mit Leben zu füllen.  
+
+
+
+
+
+
+
+
+
+

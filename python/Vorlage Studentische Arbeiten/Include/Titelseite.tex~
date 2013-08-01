@@ -1,0 +1,31 @@
+\thispagestyle{empty} \enlargethispage{20mm}
+\definecolor{mydarkblue}{rgb}{0,0,0.4}
+\vspace*{20mm} 
+{\parindent -15mm\color{mydarkblue}\rule{1.1\textwidth}{1mm}}\\
+\begin{flushright}
+{\color{mydarkblue}\LARGE \thisdoctitle}\\[5mm]
+{\parindent -15mm\color{mydarkblue}\rule{1.1\textwidth}{1mm}}\\[10mm]
+\end{flushright}
+
+\begin{center}
+{\color{mydarkblue}\Large \thisdoctype \\[20mm]
+\Large \thisauthors \\[20mm]
+
+\begin{tabular}{ll}
+ Betreuer:    & Betreuer 1 \\
+     & Betreuer 2\\
+&  \\
+&  \\
+   Ausgabe:  & 1. Januar 2013 \\
+  Abgabe:   &  2. Januar 2013 \\
+\end{tabular}} 
+\end{center}
+
+\vfill
+\begin{flushright}
+{\color{mydarkblue}\Large Universität Rostock\\
+Lehrstuhl Schiffbau\\[5mm]
+\includegraphics[height=20mm, clip=]{./figures/uni-logo}
+\hspace{15mm}\\[15mm]
+\large \thisdoctitledate }
+\end{flushright}
