@@ -264,7 +264,7 @@ def switch_mode(val):
 
 calculate_mode = None
 
-ship_input_labels = ['Lpp in [m]:', 'Breite in [m]:', 'Tiefgang in [m]:', 'Verdrängung in [m³]:', 'Leistung in [kW]:', 'Geschwindigkeit in [kn]:'] 
+ship_input_labels = ['Lpp in [m]:', 'Breite in [m]:', 'Tiefgang in [m]:', 'Verdrängung in [m³]:', 'Geschwindigkeit in [kn]:'] 
 ship_output_labels = ['Cb:', 'Froude:']
 
 weather_input_labels = ['Windgeschwindigkeit in [m/s]:', 'Windrichtung zum Schiff in [Grad]:']
@@ -274,7 +274,7 @@ result_output_labels = ['gesamter Geschw.verlust [%]:','Verlust an Leistung in [
 
 ############ definition of input and output variable ######################
 
-ship_input_variables =['lpp','breite','tiefgang','verdraengung','power','speed']
+ship_input_variables =['lpp','breite','tiefgang','verdraengung','speed']
 ship_output_variables =['cb', 'froude']
 
 weather_input_variables =['windspeed','direction']
@@ -334,21 +334,21 @@ generateVar(ship_output_variables, ship_output_var_objects)
 generateLabels(ship_output_labels, 4 , 5)
 generateFeet_Input(ship_output_variables,ship_output_var_objects,ship_output_objects, 4, 6)
 
-ttk.Label(mainframe, text='Parameter Wetter:').grid(column=3, row=10, sticky=W)
+ttk.Label(mainframe, text='Parameter Wetter:').grid(column=3, row=9, sticky=W)
 
 generateVar(weather_input_variables, weather_input_var_objects)
-generateLabels(weather_input_labels, 11)
-generateFeet_Input(weather_input_variables,weather_input_var_objects,weather_input_objects, 11)
+generateLabels(weather_input_labels, 10)
+generateFeet_Input(weather_input_variables,weather_input_var_objects,weather_input_objects, 10)
 
 generateVar(weather_output_variables, weather_output_var_objects)
-generateLabels(weather_output_labels, 11, 5)
-generateFeet_Input(weather_output_variables,weather_output_var_objects,weather_output_objects, 11 , 6)
+generateLabels(weather_output_labels, 10, 5)
+generateFeet_Input(weather_output_variables,weather_output_var_objects,weather_output_objects, 10 , 6)
 
-ttk.Label(mainframe, text='Ergebnis:').grid(column=3, row=13, sticky=W)
+ttk.Label(mainframe, text='Ergebnis:').grid(column=3, row=12, sticky=W)
 
 generateVar(result_output_variables, result_output_var_objects)
-generateLabels(result_output_labels, 14)
-generateFeet_Input(result_output_variables,result_output_var_objects,result_output_objects, 14)
+generateLabels(result_output_labels, 13)
+generateFeet_Input(result_output_variables,result_output_var_objects,result_output_objects, 13)
 
 #feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
 #feet_entry.grid(column=2, row=1, sticky=(W, E))
